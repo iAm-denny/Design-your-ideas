@@ -1,0 +1,139 @@
+{
+  "layout": [
+    {
+      "id": "living-room",
+      "tag": "polygon",
+      "points": "0,0 325,0 325,565 412,565 412,705 170,705 170,465 0,465"
+    },
+    {
+      "id": "bed-room",
+      "tag": "polygon",
+      "points": "325,0 635,0 635,368 325,368"
+    },
+    {
+      "id": "bath/WC",
+      "tag": "polygon",
+      "points": "325,368 532,368 532,565 325,565"
+    },
+    {
+      "id": "aircon-ledge",
+      "tag": "polygon",
+      "points": "532,368 635,368 635,565 532,565"
+    },
+    {
+      "id": "household-shelter",
+      "tag": "polygon",
+      "points": "0,465 170,465 170,705 0,705"
+    },
+    {
+      "id": "kitchen",
+      "tag": "polygon",
+      "points": "412,565 860,565 860,760 412,760"
+    },
+    {
+      "id": "random-dome",
+      "tag": "path",
+      "d": "M635,368 C775,368 775,565 635,565 Z"
+    },
+    {
+      "tag": "path",
+      "id": "unhackable-corner",
+      "d": "m 412,705 v 60 h 100 "
+    },
+    {
+      "tag": "path",
+      "id": "shelter-wall",
+      "d": "m 170,625 v 80 h -170 v -240 h 170 v 80"
+    },
+    {
+      "tag": "path",
+      "id": "unhackable-wall",
+      "d": "m 0,0 v 124"
+    },
+    {
+      "tag": "path",
+      "id": "unhackable-wall",
+      "d": "m 325,368 h 124"
+    },
+    {
+      "tag": "path",
+      "id": "unhackable-wall",
+      "d": "m 635,0 v 124"
+    },
+    {
+      "tag": "path",
+      "id": "unhackable-wall",
+      "d": "m 635,244 v 124"
+    },
+    {
+      "tag": "path",
+      "id": "unhackable-wall",
+      "d": "m 860,565 v 200"
+    },
+    {
+      "id": "external-wall",
+      "tag": "path",
+      "d": "m 0,125 v 330"
+    },
+    {
+      "id": "external-wall",
+      "tag": "path",
+      "d": "m 512,765 h 341"
+    },
+    {
+      "id": "external-wall",
+      "tag": "path",
+      "d": "m 312,705 h 90"
+    },
+    {
+      "id": "external-wall-windows",
+      "tag": "path",
+      "d": "m 0,0 h 635"
+    },
+    {
+      "id": "external-wall-windows",
+      "tag": "path",
+      "d": "m 635,125 v 124"
+    },
+    {
+      "id": "external-wall-windows",
+      "tag": "path",
+      "d": "m 635,368 v 203"
+    },
+    {
+      "id": "external-wall-windows",
+      "tag": "path",
+      "d": "m 635,565 h 225"
+    },
+    {
+      "id": "external-wall-windows",
+      "tag": "path",
+      "d": "M635,368 C775,368 775,565 635,565"
+    },
+    {
+      "id": "hackable-wall",
+      "tag": "path",
+      "d": "m 325,0 v 250"
+    },
+    {
+      "id": "hackable-wall",
+      "tag": "path",
+      "d": "m 325,355 v 90"
+    },
+    {
+      "id": "hackable-wall",
+      "tag": "path",
+      "d": "m 325,565 h 310"
+    },
+    {
+      "id": "hackable-wall",
+      "tag": "path",
+      "d": "m 532,368 v 197"
+    },
+    {
+      "id": "hackable-wall",
+      "tag": "path",
+      "d": "m 450,368 h 197"
+    }
+  ]
+}
