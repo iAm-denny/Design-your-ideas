@@ -1,3 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.App {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 .load_furniture_container {
   display: flex;
   justify-content: center;
@@ -15,4 +25,61 @@
 }
 .floorplan_container {
   display: flex;
+}
+
+.navigation_container {
+  background-color: #212425;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.navigation_container #logo {
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+}
+.nav-items {
+  display: flex;
+  align-items: center;
+}
+.navigation_items {
+  display: flex;
+  align-items: center;
+}
+.nav-btn {
+  background-color: #0072c4;
+  color: #fff;
+  padding: 8px;
+  border-radius: 99999px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+.nav-items div {
+  text-align: center;
+  padding: 8px;
+  cursor: pointer;
+}
+.nav-items div img {
+  filter: invert(100%) sepia(0%) saturate(9%) hue-rotate(126deg)
+    brightness(102%) contrast(102%);
+}
+.nav-items div:hover {
+  background-color: #0072c4;
+}
+
+.grabbable {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }
