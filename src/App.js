@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import JsonData from "./assets/floorplan-sample.json";
-import { itemsConfig } from "./assets/itemsConfig";
+import { itemsConfig, iconsConfig } from "./assets/itemsConfig";
 import "./App.css";
-import Floorplan from "./components/Floorplan";
+import { ReactSortable } from "react-sortablejs";
+import FloorplanList from "./components/FloorplanList";
 
 function App() {
   const [showFloor, setShowFloor] = useState(false);
   const [furnitures, setFurnitures] = useState([]);
+  const [displayFurnitures, setDisplayFurnitures] = useState([]);
 
   useEffect(() => {
     let items = [];
+
     JsonData.layout.map((data, index) => {
       items.push({
         points:
@@ -42,17 +45,55 @@ function App() {
 
   return (
     <div className="App">
-      <div className="load_furniture_container">
-        <button className="load_furniture" onClick={toggleFurniture}>
-          {showFloor ? "Hide" : "Show"} Furnitures
-        </button>
-        <button onClick={resetItems}>Reset Furnitures</button>
-      </div>
-      {showFloor && (
-        <div className="floorplan_container">
-          <Floorplan furnitures={furnitures} />
+      <div className="navigation_container">
+        <div id="logo">Homezz</div>
+        <div className="navigation_items">
+          <ReactSortable
+            group={{
+              name: "groupName",
+              pull: "clone",
+              put: false,
+            }}
+            sort={false}
+            list={furnitures}
+            setList={setFurnitures}
+            className="nav-items"
+          >
+            {iconsConfig.map((item) => {
+              return (
+                <div title={item.name}>
+                  <img src={item.path} width="20px" height="20px" />
+                </div>
+              );
+            })}
+          </ReactSortable>
+          <div className="nav-btn">Show Exmaple</div>
         </div>
-      )}
+      </div>
+
+      <div className="container">
+        <ReactSortable
+          sort={true}
+          group={{
+            name: "groupName",
+            pull: false,
+            put: true,
+          }}
+          animation={0}
+          delayOnTouchStart={false}
+          delay={0}
+          list={displayFurnitures}
+          setList={setDisplayFurnitures}
+          dragoverBubble={false}
+          draggable=" "
+          clone={(item) => ({ ...item, id: Math.random().toString() })}
+        >
+          <FloorplanList
+            displayFurnitures={displayFurnitures}
+            setDisplayFurnitures={setDisplayFurnitures}
+          />
+        </ReactSortable>
+      </div>
     </div>
   );
 }

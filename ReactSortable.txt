@@ -1,0 +1,41 @@
+       <ReactSortable
+          style={{ flex: "1 0 40%" }}
+          sort={true}
+          group={{
+            name: "groupName",
+            pull: "clone",
+            put: false,
+          }}
+          animation={200}
+          delayOnTouchStart={true}
+          delay={2}
+          list={firstGroup}
+          setList={setFirstGroup}
+        >
+          {firstGroup.map((item, index) => (
+            <div className="my-sortable-item" key={index}>
+              <span>{item.name}</span>
+            </div>
+          ))}
+        </ReactSortable>
+        <ReactSortable
+          style={{ flex: "1 0 40%" }}
+          sort={false}
+          group={{
+            name: "groupName",
+            pull: false,
+            put: true,
+          }}
+          animation={200}
+          delayOnTouchStart={true}
+          delay={2}
+          list={secondGroup}
+          setList={setSecondGroup}
+          clone={(item) => ({ ...item })}
+        >
+          {secondGroup.map((item, index) => (
+            <div className="my-sortable-item" key={index}>
+              <span>{item.name}</span>
+            </div>
+          ))}
+        </ReactSortable>
