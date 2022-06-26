@@ -54,12 +54,14 @@ function App() {
 
     setFurnitures(items);
   }, []);
-  console.log("displayFurnitures", displayFurnitures);
-  const handleKeyDown = (e) => {
+
+  const handleRemove = (e) => {
     let cloneFurniture = [...displayFurnitures];
     let data = cloneFurniture.filter((c) => c.id != selectedShapeId);
+
     setIsSelectShape(false);
     setSelectedShapeId(null);
+    localStorage.setItem("data-furnitures", JSON.stringify(data));
     setDisplayFurnitures(data);
   };
 
@@ -83,7 +85,27 @@ function App() {
     setShowFloor(true);
   };
 
-  const resetItems = () => {
+  useEffect(() => {
+    const localFurnitures = localStorage.getItem("data-furnitures");
+    if (localFurnitures) {
+      const parseData = JSON.parse(localFurnitures);
+      if (parseData && parseData.length > 0) {
+        setDisplayFurnitures(parseData);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (displayFurnitures && displayFurnitures.length > 0) {
+      localStorage.setItem(
+        "data-furnitures",
+        JSON.stringify(displayFurnitures)
+      );
+    }
+  }, [displayFurnitures]);
+
+  const resetFurniture = () => {
+    localStorage.setItem("data-furnitures", null);
     window.location.reload();
   };
 
@@ -137,8 +159,11 @@ function App() {
                   );
                 })}
               </ReactSortable>
+              <div class="nav-btn-remove" onClick={resetFurniture}>
+                Reset
+              </div>
               {isSelectShape && selectedShapeId && (
-                <div class="nav-btn-remove" onClick={handleKeyDown}>
+                <div class="nav-btn-remove" onClick={handleRemove}>
                   Remove
                 </div>
               )}
@@ -163,7 +188,12 @@ function App() {
               setList={setDisplayFurnitures}
               dragoverBubble={false}
               draggable=" "
-              clone={(item) => ({ ...item, id: Math.random().toString() })}
+              clone={(item) => ({
+                ...item,
+                id: Math.random().toString(),
+                x: window.innerWidth / 2.5,
+                y: window.innerHeight / 3,
+              })}
             >
               <FloorplanList
                 displayFurnitures={displayFurnitures}

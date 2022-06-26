@@ -14,7 +14,7 @@ const ViewFloorItem = (props) => {
 
   const handleDragStart = (e) => {
     const id = e.target.attrs.name;
-    const cloneFurniture = displayFurnitures.slice();
+    const cloneFurniture = [...displayFurnitures];
     const searchItem = cloneFurniture.find((item) => item.id == id);
     const searchIndex = cloneFurniture.indexOf(item);
     cloneFurniture.splice(searchIndex, 1);
@@ -22,12 +22,23 @@ const ViewFloorItem = (props) => {
     setDisplayFurnitures(cloneFurniture);
   };
 
-  const x = window.innerWidth / 2.5;
-  const y = window.innerHeight / 3;
+  const handleDragEnd = (e) => {
+    const id = e.target.attrs.name;
+    const x = e.target._lastPos.x;
+    const y = e.target._lastPos.y;
+    const cloneFurniture = [...displayFurnitures];
+    const searchItem = cloneFurniture.find((item) => item.id == id);
+    const newData = { ...searchItem, x, y };
+    const searchIndex = cloneFurniture.indexOf(item);
+    cloneFurniture.splice(searchIndex, 1);
+    cloneFurniture.push(newData);
+    setDisplayFurnitures(cloneFurniture);
+  };
 
   return item.tag == "polygon" ? (
     <Group
       onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
       onClick={(e) => {
         e.cancelBubble = true;
         if (cursor == "arrow") {
@@ -36,8 +47,8 @@ const ViewFloorItem = (props) => {
       }}
       draggable={cursor == "hand"}
       name={item.id}
-      x={x}
-      y={y}
+      x={item.x}
+      y={item.y}
     >
       <Line
         points={item.points}
@@ -67,6 +78,7 @@ const ViewFloorItem = (props) => {
       draggable={cursor == "hand"}
       name={item.id}
       onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
       onMouseUp={(e) => {
         if (cursor == "hand") {
           const container = e.target.getStage().container();
@@ -90,8 +102,8 @@ const ViewFloorItem = (props) => {
             handleSelectShape(item.id);
           }
         }}
-        x={x}
-        y={y}
+        x={item.x}
+        y={item.y}
         strokeWidth={8}
         scale={{
           x: 0.4,
