@@ -48,51 +48,55 @@ export const iconsConfig = [
     name: "living-room",
   },
   {
-    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082402/bed-room_av0x9m.svg",
+    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238121/bed-room_ab7zvr.svg",
     name: "bed-room",
   },
   {
-    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082401/bath-WC_rcmu3c.svg",
+    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238162/bath-WC_oi1thy.svg",
     name: "bath/WC",
   },
   {
-    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082399/aircon-ledge_empsnx.svg",
+    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238205/aircon-ledge_mecfi5.svg",
     name: "aircon-ledge",
   },
   {
-    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082399/household-shelter_rwo9hg.svg",
+    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238246/household-shelter_ismpgo.svg",
     name: "household-shelter",
   },
   {
-    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082399/kitchen_y21kzx.svg",
+    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238504/kitchen_m1olpg.svg",
     name: "kitchen",
   },
   {
-    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082399/random-dome_qdlq19.svg",
+    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238357/random-dome_owaxc0.svg",
     name: "random-dome",
   },
   {
-    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082401/unhackable-corner_sr8vy4.svg",
+    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238403/unhackable-corner_czanko.svg",
     name: "unhackable-corner",
   },
   {
-    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082401/shelter-wall_digx3q.svg",
+    path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238441/shelter-wall_vmbcsp.svg",
     name: "shelter-wall",
   },
   {
     path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082400/unhackable-wall2_opdtfo.svg",
     name: "m 325,368 h 124",
+    tag: "path",
   },
   {
     path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082403/unhackable-wall3_qxfuxy.svg",
     name: "m 635,0 v 124",
+    tag: "path",
   },
   {
     path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082399/unhackable-wall4_0A_c6coh3.svg",
     name: "m 512,765 h 341",
+    tag: "path",
   },
   {
     path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082402/unhackable-wall5_0A_f9vdub.svg",
     name: "m 325,0 v 250",
+    tag: "path",
   },
 ];

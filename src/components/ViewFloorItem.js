@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Group, Line, Path, Rect } from "react-konva";
 
-const ViewFloorItem = ({
-  item,
-  displayFurnitures,
-  setDisplayFurnitures,
-  handleClick,
-  selectedId,
-}) => {
+const ViewFloorItem = (props) => {
+  const {
+    item,
+    displayFurnitures,
+    setDisplayFurnitures,
+    handleClick,
+    selectedShapeId,
+    handleSelectShape,
+  } = props;
+
   const handleDragStart = (e) => {
     const id = e.target.attrs.name;
     const cloneFurniture = displayFurnitures.slice();
@@ -18,45 +21,44 @@ const ViewFloorItem = ({
     setDisplayFurnitures(cloneFurniture);
   };
 
+  const x = window.innerWidth / 2.5;
+  const y = window.innerHeight / 3;
   const handleClickShape = (e) => {
     e.cancelBubble = true;
+
     handleClick(item.id);
   };
 
   return item.tag == "polygon" ? (
     <Group
       onDragStart={handleDragStart}
-      onClick={handleClickShape}
+      onClick={(e) => {
+        e.cancelBubble = true;
+
+        handleSelectShape(item.id);
+      }}
       draggable
       name={item.id}
-      style={{
-        position: "relative",
-        zIndex: 1,
-      }}
-      zIndex={1}
+      x={x}
+      y={y}
     >
       <Line
         points={item.points}
         fill={item.background}
-        stroke={selectedId == item.id ? "red" : item.borderColor}
+        stroke={selectedShapeId == item.id ? "red" : item.borderColor}
         closed
         scale={{
-          x: 0.5,
-          y: 0.5,
+          x: 0.3,
+          y: 0.3,
         }}
-
-        // onMouseOver={(e) => {
-        //   const container = e.target.getStage().container();
-        //   container.style.cursor = "grab";
-        // }}
-        // onMouseDown={(e) => {
-        //   const container = e.target.getStage().container();
-        //   container.style.cursor = "grabbing";
-        // }}
-        // onMouseUp={(e) => {
-        //   const container = e.target.getStage().container();
-        //   container.style.cursor = "grab";
-        // }}
+        onMouseUp={(e) => {
+          const container = e.target.getStage().container();
+          container.style.cursor = "grab";
+        }}
+        onMouseDown={(e) => {
+          const container = e.target.getStage().container();
+          container.style.cursor = "grabbing";
+        }}
       />
     </Group>
   ) : (
@@ -64,9 +66,18 @@ const ViewFloorItem = ({
       <Path
         data={item.d}
         fill={item.background}
-        stroke={selectedId == item.id ? "red" : item.borderColor}
-        onClick={handleClickShape}
-        strokeWidth={5}
+        stroke={selectedShapeId == item.id ? "red" : item.borderColor}
+        onClick={(e) => {
+          e.cancelBubble = true;
+          handleSelectShape(item.id);
+        }}
+        x={x}
+        y={y}
+        strokeWidth={8}
+        scale={{
+          x: 0.4,
+          y: 0.4,
+        }}
       />
     </Group>
   );
