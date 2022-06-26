@@ -10,7 +10,7 @@ import { ReactComponent as HandPointerIcon } from "./assets/handPointer.svg";
 import "./App.css";
 
 function App() {
-  const [showFloor, setShowFloor] = useState(true);
+  const [showFloor, setShowFloor] = useState(false);
   const [showExample, setShowExample] = useState(false);
   const [furnitures, setFurnitures] = useState([]);
   const [displayFurnitures, setDisplayFurnitures] = useState([]);
@@ -100,13 +100,21 @@ function App() {
             <div className="navigation_items">
               <div
                 className="nav-item-pointer"
-                onClick={() => setCursor("arrow")}
+                onClick={() => {
+                  setIsSelectShape(false);
+                  setSelectedShapeId(null);
+                  setCursor("arrow");
+                }}
               >
                 <ArrowPointerIcon fill="#ABABAB" width={20} height={20} />
               </div>
               <div
                 className="nav-item-pointer"
-                onClick={() => setCursor("hand")}
+                onClick={() => {
+                  setIsSelectShape(false);
+                  setSelectedShapeId(null);
+                  setCursor("hand");
+                }}
               >
                 <HandPointerIcon fill="#ABABAB" width={20} height={20} />
               </div>
