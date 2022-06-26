@@ -9,6 +9,7 @@ const FloorplanList = (props) => {
     selectedShapeId,
     setIsSelectShape,
     handleSelectShape,
+    cursor,
   } = props;
 
   return (
@@ -16,15 +17,19 @@ const FloorplanList = (props) => {
       <Stage
         width={window.innerWidth}
         height={window.innerHeight - 60}
-        draggable
-        style={{ cursor: "grab" }}
+        draggable={cursor == "hand"}
+        style={{ cursor: cursor == "hand" && "grab" }}
         onMouseDown={(e) => {
-          const container = e.target.getStage().container();
-          container.style.cursor = "grabbing";
+          if (cursor == "hand") {
+            const container = e.target.getStage().container();
+            container.style.cursor = "grabbing";
+          }
         }}
         onMouseUp={(e) => {
-          const container = e.target.getStage().container();
-          container.style.cursor = "grab";
+          if (cursor == "hand") {
+            const container = e.target.getStage().container();
+            container.style.cursor = "grab";
+          }
         }}
         onClick={() => {
           setIsSelectShape(false);
@@ -39,6 +44,7 @@ const FloorplanList = (props) => {
               setDisplayFurnitures={setDisplayFurnitures}
               handleSelectShape={handleSelectShape}
               selectedShapeId={selectedShapeId}
+              cursor={cursor}
             />
           </Layer>
         ))}

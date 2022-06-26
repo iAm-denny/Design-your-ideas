@@ -106,8 +106,14 @@
   filter: invert(100%) sepia(0%) saturate(9%) hue-rotate(126deg)
     brightness(102%) contrast(102%);
 }
-.nav-items div:hover {
+.nav-items div:hover,
+.nav-item-pointer:hover {
   background-color: #0072c4;
+}
+.nav-item-pointer {
+  text-align: center;
+  padding: 8px;
+  cursor: pointer;
 }
 
 .grabbable {

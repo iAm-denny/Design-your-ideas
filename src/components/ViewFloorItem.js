@@ -9,11 +9,12 @@ const ViewFloorItem = (props) => {
     handleClick,
     selectedShapeId,
     handleSelectShape,
+    cursor,
   } = props;
 
   const handleDragStart = (e) => {
     const id = e.target.attrs.name;
-    const cloneFurniture = displayFurnitures.slice();
+    const cloneFurniture = [...displayFurnitures];
     const searchItem = cloneFurniture.find((item) => item.id == id);
     const searchIndex = cloneFurniture.indexOf(item);
     cloneFurniture.splice(searchIndex, 1);
@@ -21,26 +22,33 @@ const ViewFloorItem = (props) => {
     setDisplayFurnitures(cloneFurniture);
   };
 
-  const x = window.innerWidth / 2.5;
-  const y = window.innerHeight / 3;
-  const handleClickShape = (e) => {
-    e.cancelBubble = true;
-
-    handleClick(item.id);
+  const handleDragEnd = (e) => {
+    const id = e.target.attrs.name;
+    const x = e.target._lastPos.x;
+    const y = e.target._lastPos.y;
+    const cloneFurniture = [...displayFurnitures];
+    const searchItem = cloneFurniture.find((item) => item.id == id);
+    const newData = { ...searchItem, x, y };
+    const searchIndex = cloneFurniture.indexOf(item);
+    cloneFurniture.splice(searchIndex, 1);
+    cloneFurniture.push(newData);
+    setDisplayFurnitures(cloneFurniture);
   };
 
   return item.tag == "polygon" ? (
     <Group
       onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
       onClick={(e) => {
         e.cancelBubble = true;
-
-        handleSelectShape(item.id);
+        if (cursor == "arrow") {
+          handleSelectShape(item.id);
+        }
       }}
-      draggable
+      draggable={cursor == "hand"}
       name={item.id}
-      x={x}
-      y={y}
+      x={item.x}
+      y={item.y}
     >
       <Line
         points={item.points}
@@ -52,27 +60,50 @@ const ViewFloorItem = (props) => {
           y: 0.3,
         }}
         onMouseUp={(e) => {
-          const container = e.target.getStage().container();
-          container.style.cursor = "grab";
+          if (cursor == "hand") {
+            const container = e.target.getStage().container();
+            container.style.cursor = "grab";
+          }
         }}
         onMouseDown={(e) => {
-          const container = e.target.getStage().container();
-          container.style.cursor = "grabbing";
+          if (cursor == "hand") {
+            const container = e.target.getStage().container();
+            container.style.cursor = "grabbing";
+          }
         }}
       />
     </Group>
   ) : (
-    <Group draggable name={item.id} onDragStart={handleDragStart}>
+    <Group
+      draggable={cursor == "hand"}
+      name={item.id}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onMouseUp={(e) => {
+        if (cursor == "hand") {
+          const container = e.target.getStage().container();
+          container.style.cursor = "grab";
+        }
+      }}
+      onMouseDown={(e) => {
+        if (cursor == "hand") {
+          const container = e.target.getStage().container();
+          container.style.cursor = "grabbing";
+        }
+      }}
+    >
       <Path
         data={item.d}
         fill={item.background}
         stroke={selectedShapeId == item.id ? "red" : item.borderColor}
         onClick={(e) => {
           e.cancelBubble = true;
-          handleSelectShape(item.id);
+          if (cursor == "arrow") {
+            handleSelectShape(item.id);
+          }
         }}
-        x={x}
-        y={y}
+        x={item.x}
+        y={item.y}
         strokeWidth={8}
         scale={{
           x: 0.4,

@@ -5,6 +5,8 @@ import { ReactSortable } from "react-sortablejs";
 import FloorplanList from "./components/FloorplanList";
 import LoadButton from "./components/LoadButton";
 import Exmaple from "./components/Exmaple";
+import { ReactComponent as ArrowPointerIcon } from "./assets/arrow-pointer.svg";
+import { ReactComponent as HandPointerIcon } from "./assets/handPointer.svg";
 import "./App.css";
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
   const [displayFurnitures, setDisplayFurnitures] = useState([]);
   const [isSelectShape, setIsSelectShape] = useState(false);
   const [selectedShapeId, setSelectedShapeId] = useState(null);
+  const [cursor, setCursor] = useState("arrow");
 
   useEffect(() => {
     let items = [];
@@ -52,11 +55,13 @@ function App() {
     setFurnitures(items);
   }, []);
 
-  const handleKeyDown = (e) => {
+  const handleRemove = (e) => {
     let cloneFurniture = [...displayFurnitures];
     let data = cloneFurniture.filter((c) => c.id != selectedShapeId);
+
     setIsSelectShape(false);
     setSelectedShapeId(null);
+    localStorage.setItem("data-furnitures", JSON.stringify(data));
     setDisplayFurnitures(data);
   };
 
@@ -80,7 +85,27 @@ function App() {
     setShowFloor(true);
   };
 
-  const resetItems = () => {
+  useEffect(() => {
+    const localFurnitures = localStorage.getItem("data-furnitures");
+    if (localFurnitures) {
+      const parseData = JSON.parse(localFurnitures);
+      if (parseData && parseData.length > 0) {
+        setDisplayFurnitures(parseData);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (displayFurnitures && displayFurnitures.length > 0) {
+      localStorage.setItem(
+        "data-furnitures",
+        JSON.stringify(displayFurnitures)
+      );
+    }
+  }, [displayFurnitures]);
+
+  const resetFurniture = () => {
+    localStorage.setItem("data-furnitures", null);
     window.location.reload();
   };
 
@@ -95,6 +120,26 @@ function App() {
           <div className="navigation_container">
             <div id="logo">Homezz</div>
             <div className="navigation_items">
+              <div
+                className="nav-item-pointer"
+                onClick={() => {
+                  setIsSelectShape(false);
+                  setSelectedShapeId(null);
+                  setCursor("arrow");
+                }}
+              >
+                <ArrowPointerIcon fill="#ABABAB" width={20} height={20} />
+              </div>
+              <div
+                className="nav-item-pointer"
+                onClick={() => {
+                  setIsSelectShape(false);
+                  setSelectedShapeId(null);
+                  setCursor("hand");
+                }}
+              >
+                <HandPointerIcon fill="#ABABAB" width={20} height={20} />
+              </div>
               <ReactSortable
                 group={{
                   name: "groupName",
@@ -114,8 +159,11 @@ function App() {
                   );
                 })}
               </ReactSortable>
+              <div class="nav-btn-remove" onClick={resetFurniture}>
+                Reset
+              </div>
               {isSelectShape && selectedShapeId && (
-                <div class="nav-btn-remove" onClick={handleKeyDown}>
+                <div class="nav-btn-remove" onClick={handleRemove}>
                   Remove
                 </div>
               )}
@@ -140,7 +188,12 @@ function App() {
               setList={setDisplayFurnitures}
               dragoverBubble={false}
               draggable=" "
-              clone={(item) => ({ ...item, id: Math.random().toString() })}
+              clone={(item) => ({
+                ...item,
+                id: Math.random().toString(),
+                x: window.innerWidth / 2.5,
+                y: window.innerHeight / 3,
+              })}
             >
               <FloorplanList
                 displayFurnitures={displayFurnitures}
@@ -148,6 +201,7 @@ function App() {
                 selectedShapeId={selectedShapeId}
                 handleSelectShape={handleSelectShape}
                 setIsSelectShape={setIsSelectShape}
+                cursor={cursor}
               />
             </ReactSortable>
           </div>
