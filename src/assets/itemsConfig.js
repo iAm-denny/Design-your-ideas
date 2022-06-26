@@ -69,15 +69,19 @@ export const iconsConfig = [
   },
   {
     path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238357/random-dome_owaxc0.svg",
-    name: "random-dome",
+    name: "M635,368 C775,368 775,565 635,565 Z",
+    tag: "path",
   },
   {
     path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238403/unhackable-corner_czanko.svg",
-    name: "unhackable-corner",
+    name: "m 412,705 v 60 h 100",
+
+    tag: "path",
   },
   {
     path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656238441/shelter-wall_vmbcsp.svg",
-    name: "shelter-wall",
+    name: "m 170,625 v 80 h -170 v -240 h 170 v 80",
+    tag: "path",
   },
   {
     path: "https://res.cloudinary.com/dypkefkpl/image/upload/v1656082400/unhackable-wall2_opdtfo.svg",

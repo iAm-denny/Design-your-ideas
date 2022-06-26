@@ -5,15 +5,18 @@ import { ReactSortable } from "react-sortablejs";
 import FloorplanList from "./components/FloorplanList";
 import LoadButton from "./components/LoadButton";
 import Exmaple from "./components/Exmaple";
+import { ReactComponent as ArrowPointerIcon } from "./assets/arrow-pointer.svg";
+import { ReactComponent as HandPointerIcon } from "./assets/handPointer.svg";
 import "./App.css";
 
 function App() {
-  const [showFloor, setShowFloor] = useState(false);
+  const [showFloor, setShowFloor] = useState(true);
   const [showExample, setShowExample] = useState(false);
   const [furnitures, setFurnitures] = useState([]);
   const [displayFurnitures, setDisplayFurnitures] = useState([]);
   const [isSelectShape, setIsSelectShape] = useState(false);
   const [selectedShapeId, setSelectedShapeId] = useState(null);
+  const [cursor, setCursor] = useState("arrow");
 
   useEffect(() => {
     let items = [];
@@ -51,7 +54,7 @@ function App() {
 
     setFurnitures(items);
   }, []);
-
+  console.log("displayFurnitures", displayFurnitures);
   const handleKeyDown = (e) => {
     let cloneFurniture = [...displayFurnitures];
     let data = cloneFurniture.filter((c) => c.id != selectedShapeId);
@@ -95,6 +98,18 @@ function App() {
           <div className="navigation_container">
             <div id="logo">Homezz</div>
             <div className="navigation_items">
+              <div
+                className="nav-item-pointer"
+                onClick={() => setCursor("arrow")}
+              >
+                <ArrowPointerIcon fill="#ABABAB" width={20} height={20} />
+              </div>
+              <div
+                className="nav-item-pointer"
+                onClick={() => setCursor("hand")}
+              >
+                <HandPointerIcon fill="#ABABAB" width={20} height={20} />
+              </div>
               <ReactSortable
                 group={{
                   name: "groupName",
@@ -148,6 +163,7 @@ function App() {
                 selectedShapeId={selectedShapeId}
                 handleSelectShape={handleSelectShape}
                 setIsSelectShape={setIsSelectShape}
+                cursor={cursor}
               />
             </ReactSortable>
           </div>
