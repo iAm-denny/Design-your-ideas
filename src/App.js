@@ -104,6 +104,8 @@ function App() {
     }
   }, [displayFurnitures]);
 
+  console.log("displayFurnitures", displayFurnitures);
+
   const resetFurniture = () => {
     localStorage.setItem("data-furnitures", null);
     window.location.reload();
@@ -159,11 +161,11 @@ function App() {
                   );
                 })}
               </ReactSortable>
-              <div class="nav-btn-remove" onClick={resetFurniture}>
+              <div className="nav-btn-remove" onClick={resetFurniture}>
                 Reset
               </div>
               {isSelectShape && selectedShapeId && (
-                <div class="nav-btn-remove" onClick={handleRemove}>
+                <div className="nav-btn-remove" onClick={handleRemove}>
                   Remove
                 </div>
               )}

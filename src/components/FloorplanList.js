@@ -18,7 +18,10 @@ const FloorplanList = (props) => {
         width={window.innerWidth}
         height={window.innerHeight - 60}
         draggable={cursor == "hand"}
-        style={{ cursor: cursor == "hand" && "grab" }}
+        style={{
+          cursor: cursor == "hand" && "grab",
+          background: "#F2F2F2",
+        }}
         onMouseDown={(e) => {
           if (cursor == "hand") {
             const container = e.target.getStage().container();
