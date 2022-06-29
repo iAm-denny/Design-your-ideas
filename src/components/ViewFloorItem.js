@@ -13,7 +13,6 @@ const ViewFloorItem = (props) => {
   } = props;
 
   const handleDragStart = (e) => {
-    console.log("-..........", e);
     const id = e.target.attrs.name;
     const cloneFurniture = [...displayFurnitures];
     const searchItem = cloneFurniture.find((item) => item.id == id);
@@ -25,9 +24,8 @@ const ViewFloorItem = (props) => {
 
   const handleDragEnd = (e) => {
     const id = e.target.attrs.name;
-    const x = e.target._lastPos.x;
-    const y = e.target._lastPos.y;
-
+    const x = e.target.x();
+    const y = e.target.y();
     const cloneFurniture = [...displayFurnitures];
     const searchItem = cloneFurniture.find((item) => item.id == id);
     const newData = { ...searchItem, x, y };
@@ -38,7 +36,8 @@ const ViewFloorItem = (props) => {
   };
 
   return item.tag == "polygon" ? (
-    <Group
+    <Line
+      points={item.points}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       draggable={cursor == "hand"}
@@ -63,20 +62,17 @@ const ViewFloorItem = (props) => {
       }}
       x={item.x}
       y={item.y}
-    >
-      <Line
-        points={item.points}
-        fill={item.background}
-        stroke={selectedShapeId == item.id ? "red" : item.borderColor}
-        closed
-        scale={{
-          x: 0.3,
-          y: 0.3,
-        }}
-      />
-    </Group>
+      fill={item.background}
+      stroke={selectedShapeId == item.id ? "red" : item.borderColor}
+      closed
+      scale={{
+        x: 0.3,
+        y: 0.3,
+      }}
+    />
   ) : (
-    <Group
+    <Path
+      data={item.d}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       draggable={cursor == "hand"}
@@ -101,18 +97,14 @@ const ViewFloorItem = (props) => {
       }}
       x={item.x}
       y={item.y}
-    >
-      <Path
-        data={item.d}
-        fill={item.background}
-        stroke={selectedShapeId == item.id ? "red" : item.borderColor}
-        strokeWidth={8}
-        scale={{
-          x: 0.4,
-          y: 0.4,
-        }}
-      />
-    </Group>
+      fill={item.background}
+      stroke={selectedShapeId == item.id ? "red" : item.borderColor}
+      strokeWidth={8}
+      scale={{
+        x: 0.5,
+        y: 0.5,
+      }}
+    />
   );
 };
 
