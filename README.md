@@ -15,3 +15,10 @@ After set up in your local machine, You have to run `npm install --save` or `yar
 ## Run Project
 
 You have to run `npm start` or `yarn start`
+
+## Fetch Latest Code
+
+- Run this command `git fetch origin`
+- git pull
+- Merge branch `git merge [branch_name]`
+- git push
