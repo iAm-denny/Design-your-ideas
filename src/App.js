@@ -104,8 +104,6 @@ function App() {
     }
   }, [displayFurnitures]);
 
-  console.log("displayFurnitures", displayFurnitures);
-
   const resetFurniture = () => {
     localStorage.setItem("data-furnitures", null);
     window.location.reload();
@@ -195,6 +193,9 @@ function App() {
                 id: Math.random().toString(),
                 x: window.innerWidth / 2.5,
                 y: window.innerHeight / 3,
+                scaleX: item.tag == "polygon" ? 0.3 : 0.5,
+                scaleY: item.tag == "polygon" ? 0.3 : 0.5,
+                rotation: 0,
               })}
             >
               <FloorplanList
